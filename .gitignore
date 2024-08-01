@@ -1,0 +1,11 @@
+.nextflow
+reads*
+results
+samples
+work
+.nextflow.log*
+.history
+*.iml
+.idea
+test*
+.vscode
