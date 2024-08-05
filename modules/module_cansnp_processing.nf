@@ -36,7 +36,7 @@ workflow module_cansnp_processing {
 // confindr execution
       confindr(trimmedReads)
 // creation of single-sample msh files using mash sketch
-      mash(trimmedReads)
+//      mash(trimmedReads)
 }
 
 
