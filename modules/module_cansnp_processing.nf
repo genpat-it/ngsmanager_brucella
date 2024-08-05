@@ -10,7 +10,7 @@ include { mash } from '../steps/step_4TY_distance__mash.nf'
 
 
 // variables to get reference genome
-def referenceCode = 'GCA_000740415.1'
+def referenceCode = 'GCF_000740415.1'
 def referencePath = "${params.assets_dir}/module_cansnp_processing/GCF_000740415.1.fasta"
 
 
