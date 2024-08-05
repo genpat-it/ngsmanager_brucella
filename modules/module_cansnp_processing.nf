@@ -6,10 +6,11 @@ include { extractDsRef; extractKey } from '../functions/common.nf'
 include { module_reads_processing } from '../modules/module_reads_processing.nf'
 include { snippy; samtools_pileup; samtools_depth; coverage_minmax } from '../steps/step_2AS_mapping__snippy.nf'
 include { confindr } from '../steps/step_3TX_class__confindr.nf'
+include { mash_sketch } from '../steps/step_4TY_distance__mash-sketch.nf'
 
 
 // variables to get reference genome
-def referenceCode = 'GCF_000740415.1'
+def referenceCode = 'GCA_000740415.1'
 def referencePath = "${params.assets_dir}/module_cansnp_processing/GCF_000740415.1.fasta"
 
 
@@ -34,6 +35,8 @@ workflow module_cansnp_processing {
       coverage = samtools_depth(bam, 'snippy').coverage
 // confindr execution
       confindr(trimmedReads)
+// creation of single-sample msh files using mash sketch
+      mash_sketch(trimmedReads)
 }
 
 

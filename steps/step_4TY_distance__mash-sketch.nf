@@ -15,7 +15,7 @@ def ENTRYPOINT = "step_${STEP}__${METHOD}"
 def DB_PATH = param("step_4TY_distance__mash__db_path")
 def DB_NAME = param("step_4TY_distance__mash__db_name")
 
-process mash {
+process mash_sketch {
     container "${LOCAL_REGISTRY}/bioinfo/mash:2.3--debdd7eb23"
     containerOptions = "-v ${DB_PATH}:/dataset_msh:ro"
     tag "${md?.cmp}/${md?.ds}/${md?.dt}"
@@ -40,15 +40,14 @@ process mash {
       base = "${md.ds}-${ex.dt}_${md.cmp}_mash"
         """
           zcat ${r1} ${r2} | mash sketch -r -m 2 -c 100 -o ${base} -
-          mash dist /dataset_msh/${DB_NAME} ${base}.msh > ${md.ds}-${ex.dt}_${md.cmp}_dist.tsv
         """
 }
 
-workflow step_4TY_distance__mash {
+workflow step_4TY_distance__mash-sketch {
     take: 
       reads
     main:
-      mash(reads)
+      mash_sketch(reads)
 }
 
 workflow {
