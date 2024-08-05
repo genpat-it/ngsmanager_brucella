@@ -6,7 +6,7 @@ include { extractDsRef; extractKey } from '../functions/common.nf'
 include { module_reads_processing } from '../modules/module_reads_processing.nf'
 include { snippy; samtools_pileup; samtools_depth; coverage_minmax } from '../steps/step_2AS_mapping__snippy.nf'
 include { confindr } from '../steps/step_3TX_class__confindr.nf'
-include { mash_sketch } from '../steps/step_4TY_distance__mash-sketch.nf'
+include { mash } from '../steps/step_4TY_distance__mash.nf'
 
 
 // variables to get reference genome
@@ -36,7 +36,7 @@ workflow module_cansnp_processing {
 // confindr execution
       confindr(trimmedReads)
 // creation of single-sample msh files using mash sketch
-      mash_sketch(trimmedReads)
+      mash(trimmedReads)
 }
 
 

@@ -40,8 +40,8 @@ process mash {
       base = "${md.ds}-${ex.dt}_${md.cmp}_mash"
         """
           zcat ${r1} ${r2} | mash sketch -r -m 2 -c 100 -o ${base} -
-          mash dist /dataset_msh/${DB_NAME} ${base}.msh > ${md.ds}-${ex.dt}_${md.cmp}_dist.tsv
         """
+//          mash dist /dataset_msh/${DB_NAME} ${base}.msh > ${md.ds}-${ex.dt}_${md.cmp}_dist.tsv
 }
 
 workflow step_4TY_distance__mash {
