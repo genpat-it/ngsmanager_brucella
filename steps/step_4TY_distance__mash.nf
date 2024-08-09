@@ -39,8 +39,8 @@ process mash {
       md = parseMetadataFromFileName(r1.getName())
       base = "${md.ds}-${ex.dt}_${md.cmp}_mash"
         """
-          zcat ${r1} ${r2} | mash sketch -r -m 2 -c 100 -o ${base} -
-        """
+          zcat ${r1} ${r2} | mash sketch -r -m 2 -o ${base} -
+        """ 
 //          mash dist /dataset_msh/${DB_NAME} ${base}.msh > ${md.ds}-${ex.dt}_${md.cmp}_dist.tsv
 }
 

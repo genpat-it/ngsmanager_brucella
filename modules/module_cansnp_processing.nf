@@ -1,7 +1,7 @@
 nextflow.enable.dsl=2
 
 // include processes and workflows from other nextflow scripts
-include { getInput; getGenusSpecies } from '../functions/parameters.nf'
+include { getInput } from '../functions/parameters.nf' //; getGenusSpecies
 include { extractDsRef; extractKey } from '../functions/common.nf'
 include { module_reads_processing } from '../modules/module_reads_processing.nf'
 include { snippy; samtools_pileup; samtools_depth; coverage_minmax } from '../steps/step_2AS_mapping__snippy.nf'
@@ -10,15 +10,15 @@ include { mash } from '../steps/step_4TY_distance__mash.nf'
 
 
 // variables to get reference genome
-def referenceCode = 'GCF_000740415.1'
-def referencePath = "${params.assets_dir}/module_cansnp_processing/GCF_000740415.1.fasta"
+def referenceCode = 'chromosomeI-II_AE014291-AE014292.gbk'
+def referencePath = "${params.assets_dir}/module_cansnp_processing/chromosomeI-II_AE014291-AE014292.gbk"
 
 
 // workflow definition
 workflow module_cansnp_processing {
     take: 
       rawReads
-      genus_species
+      //genus_species
     main:
 // reads_processing execution (trimming with fastp + QC with fastQC for %Q30)
       module_reads_processing(rawReads)
@@ -36,11 +36,11 @@ workflow module_cansnp_processing {
 // confindr execution
       confindr(trimmedReads)
 // creation of single-sample msh files using mash sketch
-//      mash(trimmedReads)
+      mash(trimmedReads)
 }
 
 
 // default workflow (calls created module)
 workflow {
-    module_cansnp_processing(getInput(), getGenusSpecies())
+    module_cansnp_processing(getInput())//, getGenusSpecies())
 }
